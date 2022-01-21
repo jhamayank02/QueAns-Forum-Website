@@ -1,0 +1,313 @@
+/* Forum Body */
+
+h2{
+    margin: 1rem 0;
+    color: #30475e;
+}
+
+.forumBody{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0;
+}
+
+.forumBody .leftContainer{
+    /* height: 120vh; */
+    /* background: red; */
+    width: 60%;
+}
+
+.forumBody .rightContainer{
+    /* height: 70vh; */
+    /* background: blue; */
+    width: 30%;
+    position: sticky;
+    top: 0;
+    right: 0;
+}
+    
+.forumBody .leftContainer .QAContainer{
+    padding: 10px 5px;
+    /* border: 2px solid black; */
+}
+    
+.forumBody .leftContainer .QAContainer .question, .forumBody .leftContainer .QAContainer .answer{
+    /* border: 2px solid red; */
+    padding: 12px 4px;
+}
+    
+.forumBody .leftContainer .QAContainer .question a, .forumBody .leftContainer .QAContainer .answer a{
+    text-decoration: none;
+}
+    
+.forumBody .leftContainer .QAContainer .question .queBox, .forumBody .leftContainer .QAContainer .answer .queBox{
+    padding: 3px 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #094dcb;
+}
+    
+.forumBody .leftContainer .QAContainer .question .problemDefinition, .forumBody .leftContainer .QAContainer .answer .solution{
+    line-height: 1.6rem;
+    font-size: 17px;
+    color: #525252;
+    margin-bottom: 25px;
+}
+    
+.forumBody .leftContainer .QAContainer .question .extraBox, .forumBody .leftContainer .QAContainer .answer .extraBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 10px;
+    /* border: 2px solid blue; */
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #606060;
+}
+    
+.forumBody .leftContainer .QAContainer .question .extraBox .timeBox, .forumBody .leftContainer .QAContainer .answer .extraBox .timeBox{
+    font-size: 14px;
+    color: #979797;
+    font-weight: normal;
+}
+    
+.forumBody .leftContainer .QAContainer .question .extraBox .userBox, .forumBody .leftContainer .QAContainer .answer .extraBox .userBox{
+    display: flex;
+    align-items: center;
+    /* border: 2px solid #d1d0d0; */
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+    
+.forumBody .leftContainer .QAContainer .question .extraBox .userBox small, .forumBody .leftContainer .QAContainer .answer .extraBox .userBox small{
+    font-size: 14px;
+    color: #979797;
+    font-weight: normal;
+    margin-right: 5px;
+}
+    
+.forumBody .leftContainer .QAContainer .question .extraBox .userBox img, .forumBody .leftContainer .QAContainer .answer .extraBox .userBox img{
+    height: 20px;
+    /* border: 2px solid #d1d0d0; */
+    border-radius: 4px;
+}
+    
+.forumBody .leftContainer .QAContainer .question .extraBox .userBox .userName, .forumBody .leftContainer .QAContainer .answer .extraBox .userBox .userName{
+    margin-left: 7px;
+}
+    
+.forumBody .leftContainer .QAContainer .question .relatedTagsBox{
+    display: flex;
+    /* border: 2px solid yellow; */
+    padding: 3px 10px;
+    margin-bottom: 5px;
+}
+
+.tag{
+    background-color: #f05454;
+    color: white;
+    font-size: 16px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+
+.forumBody .leftContainer .QAContainer .answer .replyBox{
+    padding: 7px 2px;
+}
+
+.forumBody .leftContainer .QAContainer .answer .replyBox input{
+    width: 40%;
+    padding: 7px 4px;
+    border-radius: 4px;
+    outline: none;
+    border: 2px solid darkgrey;
+}
+
+.replyBtn{
+    background-color: #30475e;
+    border: 2px solid #30475e;
+    color: #F5F5F5;
+}
+
+.replyBtn:hover{
+    background-color: #f5f5f5;
+    border: 2px solid #f5f5f5;
+    color: #30475e;
+}
+
+.answerBtn{
+    margin: 5px !important;
+}
+
+.answerQue{
+    margin: 10px 0 !important;
+}
+
+.relatedQuestions .question{
+    /* border: 2px solid red; */
+    padding: 12px 4px;
+}
+    
+.relatedQuestions .question a{
+    text-decoration: none;
+}
+    
+.relatedQuestions .question .queBox{
+    padding: 3px 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #094dcb;
+}
+    
+.forumBody .leftContainer .questionsContainer .question .relatedTagsBox, .relatedQuestions .question .relatedTagsBox{
+    display: flex;
+    /* border: 2px solid yellow; */
+    padding: 3px 10px;
+    margin-bottom: 5px;
+}
+
+.replies{
+    display: flex;
+    justify-content: end;
+}
+
+.replies ul{
+    list-style: none;
+}
+
+.replies ul li{
+    /* background-color: #e3e3e3; */
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.replies ul hr{
+    margin: 10px 0;
+}
+
+.replies ul li span:first-child{
+    font-weight: bold;
+}
+
+.replies ul li span:nth-child(2){
+    margin-left: 8px;
+    /* font-weight: bold; */
+    color: #959595;
+}
+
+.clickedBtn{
+    color: black !important;
+}
+
+
+.extendedNavbar{
+    background-color: #F05454;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 40px;
+}
+
+.extendedNavbar .forumMenu{
+    color: #f5f5f5;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.extendedNavbar .forumSearchBar form{
+    position: relative;
+    display: inline-block;
+}
+
+.extendedNavbar .forumSearchBar form input{
+    /* position: relative; */
+    padding: 2px 7px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    border: 2px solid #f5f5f5;
+}
+
+.extendedNavbar .forumSearchBar form .forumSearchIcon button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    background: none;
+}
+
+.extendedNavbar .forumSearchBar form .forumSearchIcon button img{
+    height: 20px;
+    background-color: #ffffff;
+}
+
+.forumMenu{
+    cursor: pointer;
+}
+
+.forumMenuContents{
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 120px;
+    z-index: 2;
+    padding: 10px 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #6a6a6a;
+    display: none;
+}
+
+.forumMenuContents .menuItems{
+    list-style: none;
+    line-height: 1.6rem;
+    padding: 10px;
+}
+
+.forumMenuContents .menuItems li{
+    margin-top: 5px;
+}
+
+.forumMenuContents .menuItems li a{
+    color: black;
+    text-decoration: none;
+    /* padding: 10px 10px; */
+}
+
+.forumMenuContents .menuItems li a:hover{
+    color: #f05454;
+    /* padding: 10px 10px; */
+}
+
+
+
+
+/* Responsive CSS */
+@media only screen and (max-width: 1000px) {
+    .forumBody{
+        flex-direction: column;
+    }
+    .forumBody .leftContainer{
+        width: 90%;
+        margin: auto;
+    }
+    .forumBody .leftContainer .questionsContainer .question .extraBox, .answer .extraBox {
+        flex-wrap: wrap;
+        justify-content: space-around !important;
+        margin-top: 10px;
+    }
+    .forumBody .leftContainer .questionsContainer .question .extraBox div, .answer .extraBox div{
+        margin-top: 10px;
+    }
+    .forumBody .rightContainer{
+        width: 90%;
+        margin: auto;
+        position: relative;
+        margin-top: 30px;
+    }
+    .extendedNavbar {
+        padding: 4px 10px;
+    }
+  }

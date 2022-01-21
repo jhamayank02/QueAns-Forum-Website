@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    {% block css %}{% endblock css %}
+    <link rel="stylesheet" href="static\css\base.css">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <title>{% block title %}{% endblock title %} - QueAns</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/static/images/logo1.png" alt="logo">
+            <span>QueAns</span>
+        </div>
+        <div class="navMenu">
+            <li><a href="/" class="{% block homeActive %}{% endblock homeActive %}">HOME</a></li>
+            <li><a href="/forum" class="{% block forumActive %}{% endblock forumActive %}">FORUM</a></li>
+        </div>
+        <div class="accountSection">
+            {% if user.is_authenticated %}
+            <div class="userDropdown" id="userDropdown">Welcome {{request.user}} <i class="fas fa-sort-down"></i></div>
+            <div class="userDropdownContents" id="userDropdownContents">
+                <div class="options">
+                    <a href="/logout">
+                        <li>Logout</li>
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <button id="signup" class="btn signupBtn">SignUp</button>
+            <button id="login" class="btn loginBtn">Login</button>
+            {% endif %}
+
+        </div>
+
+        <!-- Responsive navbar -->
+        <div class="hamburgerMenu">☰</div>
+        <div class="hamburgerMenuItems">
+            <div class="navMenu">
+                <li><a href="/">HOME</a></li>
+                <hr>
+                <li><a href="/forum">FORUM</a></li>
+                <hr>
+            </div>
+            <div class="accountSection">
+                {% if user.is_authenticated %}
+                <div class="userDropdown" id="userDropdown">Welcome {{request.user}}</div>
+                <hr>
+                <div class="options">
+                    <a href="/logout">
+                        <li>Logout</li>
+                    </a>
+                </div>
+                <hr>
+            </div>
+            {% else %}
+            <button id="signup" class="btn signupBtn">SignUp</button>
+            <button id="login" class="btn loginBtn">Login</button>
+            {% endif %}
+
+        </div>
+        </div>
+    </nav>
+
+    <!-- Alerts -->
+    {% for message in messages %}
+    <div class="message {{message.tags}}">
+        <p>{{message}}</p>
+        <span id="closeAlertBtn">X</span>
+    </div>
+    {% endfor %}
+
+    <!-- Body -->
+    {% block body %}{% endblock body %}
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="logo">
+            <img src="/static/images/logo1.png" alt="logo">
+            <span>QueAns</span>
+        </div>
+        <div class="copyright">
+            <div>Copyright &copy; 2022-2023 || All rights reserved</div>
+        </div>
+    </footer>
+
+
+    <!-- Signin Modal -->
+    <div class="signupModal" id="signupModal">
+        <h2>SignUp</h2>
+        <div class="inputFields">
+            <form action="/signup" method="POST">
+                {% csrf_token %}
+                <label for="username">Username</label>
+                <input required type="text" name="username" id="username">
+                <label for="fname">First name</label>
+                <input required type="text" name="fname" id="fname">
+                <label for="lname">Last name</label>
+                <input required type="text" name="lname" id="lname">
+                <label for="email">Email id</label>
+                <input required type="email" name="email" id="email">
+                <label for="pass1">Choose a password</label>
+                <input required type="password" name="pass1" id="pass1">
+                <label for="pass2">Confirm password</label>
+                <input required type="password" name="pass2" id="pass2">
+
+                <a href="#"><button type="submit" class="submitBtn btn" id="submitBtn">Submit</button></a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="loginModal" id="loginModal">
+        <h2>Login</h2>
+        <div class="inputFields">
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <label for="loginusername">Username</label>
+                <input required type="text" name="loginusername" id="loginusername">
+                <label for="loginpass">Password</label>
+                <input required type="password" name="loginpass" id="loginpass">
+
+                <a href="#"><button type="submit" class="submitBtn btn">Submit</button></a>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Javascript -->
+    <script src="https://kit.fontawesome.com/651af2ec52.js" crossorigin="anonymous"></script>
+
+
+    <!-- Tiny MCE -->
+    <script type="text/javascript" src='https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#basic-conf',
+            width: 600,
+            height: 300,
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks code fullscreen insertdatetime media nonbreaking',
+                'table emoticons template paste help'
+            ],
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+                'forecolor backcolor emoticons | help',
+            menu: {
+                favs: { title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons' }
+            },
+            menubar: 'favs file edit view insert format tools table help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+
+
+    </script>
+
+
+    <script>
+            // Signup and Login Modal code
+            let signup = document.getElementById('signup')
+            let signupModal = document.getElementById('signupModal')
+            let login = document.getElementById('login')
+            let loginModal = document.getElementById('loginModal')
+
+            signup && signup.addEventListener('click', () => {
+                loginModal.classList.remove('display')
+                signupModal.classList.toggle('display')
+            })
+
+
+            login && login.addEventListener('click', () => {
+
+                signupModal.classList.remove('display')
+                loginModal.classList.toggle('display')
+
+            })
+        
+        // For logout menu
+        let userDropdown = document.getElementById('userDropdown')
+        let userDropdownContents = document.getElementById('userDropdownContents')
+
+        userDropdown && userDropdown.addEventListener('click', () => {
+            userDropdownContents.classList.toggle('display')
+        })
+
+        // For closing the alerts
+        let closeAlertBtn = document.getElementById('closeAlertBtn')
+        let message = document.getElementsByClassName('message')[0]
+
+        closeAlertBtn && closeAlertBtn.addEventListener('click', () => {
+            message.style.display = 'none'
+        })
+
+        // Hamburger menu
+        let hamburgerMenu = document.getElementsByClassName('hamburgerMenu')[0]
+        let hamburgerMenuItems = document.getElementsByClassName('hamburgerMenuItems')[0]
+
+        hamburgerMenu && hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenuItems.classList.toggle('display')
+            console.log("clicked")
+        })
+
+        // Other JS code
+        {% block js %} {% endblock js %}
+    </script>
+
+</body>
+
+</html>

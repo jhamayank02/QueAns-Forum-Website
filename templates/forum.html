@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="static/css/forum.css">{% endblock css %}
+
+{% block title %}Forum{% endblock title %}
+{% block forumActive %}active{% endblock forumActive %}
+
+{% block body %}
+
+<!-- Search and other options -->
+<div class="extendedNavbar">
+    <!-- If user is authenticated only then show this menu -->
+    {% if user.is_authenticated %}
+    <div class="forumMenu" id="forumMenuHamburger">☰</div>
+    <div class="forumMenuContents" id="forumMenuContents">
+        <div class="menuItems">
+            <li><a href="/askQuestion">Ask Questions</a></li>
+            <hr>
+            <li><a href="/previouslyAsked">Previously Asked Questions</a></li>
+            <hr>
+            <li><a href="/previouslyAnswered">Previously Answered Questions</a></li>
+            <hr>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Search bar -->
+    <div class="forumSearchBar">
+        <form action="/search" method="POST">
+            {% csrf_token %}
+            <input type="text" name='query' placeholder="Enter text to search something">
+            <div class="forumSearchIcon">
+                <button type="submit"><img src="/static/images/searchIcon.png" alt="search icon"></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% load splitTag %}
+{% load humanize %}
+
+<div class="forumBody">
+
+    <!-- Left Container -->
+    <div class="leftContainer">
+        <div class="newestQuestions">
+            <h2>Recently Asked Questions</h2>
+            <hr>
+
+            <!-- Questions -->
+            <div class="questionsContainer">
+                {% for question in allQuestions %}
+                <div class="question">
+                    <a href="/{{question.queSno}}">
+                        <div class="queBox">{{question.questionShortDesc}}</div>
+                        <div class="extraBox">
+                            <div class="votesBox">{{question.views}} Views</div>
+                            <div class="answersBox">{{question.noOfAnswers}} Answers</div>
+                            <div class="timeBox">Asked on {{question.askedOn|timesince}}</div>
+                            <div class="userBox">
+                                <small>Asked by</small>
+                                <img src="/static/images/user.png" alt="user image">
+                                <p class="userName">{{question.askedBy}}</p>
+                            </div>
+                        </div>
+                        <div class="relatedTagsBox">
+                            {% for tag in question.tags|split:"," %}
+                            <div class="tag">{{tag}}</div>
+                            {% endfor %}
+                        </div>
+                    </a>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Container -->
+    <div class="rightContainer">
+        <!-- Ask question -->
+        <div class="askYourQuestionContainer">
+            <!-- If user is logged in only then allow to post questions -->
+            {% if user.is_authenticated %}
+            <h2>If you have any question in your mind, ask to the community!</h2>
+            <a href="/askQuestion"><button class="btn askBtn">Ask question</button></a>
+
+            {% else %}
+            <h2>Signup to ask questions. If you already have an account Login to get started.</h2>
+
+            {% endif %}
+
+            <hr>
+        </div>
+
+        <!-- Popular questions -->
+        <div class="popularQuestions">
+            <h2>Popular Questions</h2>
+            <hr>
+            {% for popularQuestion in popularQuestions %}
+            <div class="question">
+                <a href="/{{popularQuestion.queSno}}">
+                    <div class="queBox">{{popularQuestion.questionShortDesc}}</div>
+                    <div class="relatedTagsBox">
+                        {% for tag in popularQuestion.tags|split:"," %}
+                        <div class="tag">{{tag}}</div>
+                        {% endfor %}
+                    </div>
+                </a>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock body %}
+
+{% block js %}
+<!-- Set input field width according to the width of placeholder -->
+var input = document.getElementsByTagName('input');
+if(input!=null){
+            for(i=0; i<input.length; i++){
+                if(input[i].getAttribute('placeholder')!=null){
+                    input[i].setAttribute('size',input[i].getAttribute('placeholder').length); } 
+                }
+             }
+
+<!-- Hamburger menu -->
+forumMenuHamburger=document.getElementById('forumMenuHamburger')
+forumMenuContents=document.getElementById('forumMenuContents') forumMenuHamburger.addEventListener('click', ()=>{
+forumMenuContents.classList.toggle('display')
+})
+
+{% endblock js %}

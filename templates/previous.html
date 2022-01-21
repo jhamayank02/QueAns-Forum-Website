@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="static/css/previous.css">{% endblock css %}
+
+{% block title %}{{title}}{% endblock title %}
+
+{% block body %}
+
+{% load splitTag %}
+{% load humanize %}
+
+<!-- Previously asked questions/answers -->
+<div class="previouslyContainer">
+    
+    <div class="questionsContainer">
+        {% if Questions.count > 0 %}
+        <h2>{{title}}</h2>
+        {% for question in Questions %}
+        <div class="question">
+            <a href="/{{question.queSno}}">
+                <div class="queBox">{{question.questionShortDesc}}</div>
+                <div class="extraBox">
+                    <div class="votesBox">{{question.views}} Views</div>
+                    <div class="answersBox">{{question.noOfAnswers}} Answers</div>
+                    <div class="timeBox">Asked on {{question.askedOn|timesince}}</div>
+                    <div class="userBox">
+                        <small>Asked by</small>
+                        <img src="/static/images/user.png" alt="user image">
+                        <p class="userName">{{question.askedBy}}</p>
+                    </div>
+                </div>
+                <div class="relatedTagsBox">
+                    {% for tag in question.tags|split:"," %}
+                    <div class="tag">{{tag}}</div>
+                    {% endfor %}
+                </div>
+            </a>
+        </div>
+            <hr>
+            {% endfor %}
+
+            {% else %}
+            <h2>No {{title}}</h2>
+
+            {% endif %}
+        </div>
+
+</div>
+
+{% endblock body %}

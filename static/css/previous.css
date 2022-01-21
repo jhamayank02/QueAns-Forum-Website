@@ -1,0 +1,107 @@
+h2{
+    margin: 1rem 0;
+    color: #30475e;
+}
+
+.previouslyContainer{
+    width: 70%;
+    margin: auto;
+}
+
+.questionsContainer{
+    padding: 10px 5px;
+    /* border: 2px solid black; */
+}
+    
+.questionsContainer .question{
+    /* border: 2px solid red; */
+    padding: 12px 4px;
+}
+    
+.questionsContainer .question a{
+    text-decoration: none;
+}
+    
+.questionsContainer .question .queBox{
+    padding: 3px 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #094dcb;
+}
+    
+.questionsContainer .question .extraBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 10px;
+    /* border: 2px solid blue; */
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #606060;
+}
+    
+.questionsContainer .question .extraBox .timeBox{
+    font-size: 14px;
+    color: #979797;
+    font-weight: normal;
+}
+    
+.questionsContainer .question .extraBox .userBox{
+    display: flex;
+    align-items: center;
+    /* border: 2px solid #d1d0d0; */
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+    
+.questionsContainer .question .extraBox .userBox small{
+    font-size: 14px;
+    color: #979797;
+    font-weight: normal;
+    margin-right: 5px;
+}
+    
+.questionsContainer .question .extraBox .userBox img{
+    height: 20px;
+    /* border: 2px solid #d1d0d0; */
+    border-radius: 4px;
+}
+    
+.questionsContainer .question .extraBox .userBox .userName{
+    margin-left: 7px;
+}
+    
+.questionsContainer .question .relatedTagsBox{
+    display: flex;
+    /* border: 2px solid yellow; */
+    padding: 3px 10px;
+    margin-bottom: 5px;
+}
+
+.tag{
+    background-color: #f05454;
+    color: white;
+    font-size: 16px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+
+
+/* Responsive CSS */
+@media only screen and (max-width: 1000px) {
+    .previouslyContainer {
+        width: 90%;
+        margin: auto;
+    }
+    .question .extraBox {
+        flex-wrap: wrap;
+        justify-content: space-around !important;
+        margin-top: 10px;
+    }
+    .question .extraBox div{
+        margin: 0 10px;
+        margin-top: 10px;
+    }
+  }

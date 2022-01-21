@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="static/css/askQuestion.css">{% endblock css %}
+
+{% block title %}Ask a question{% endblock title %}
+
+{% block body %}
+
+<!-- If user is authenticated only then allow him to post questions -->
+{% if user.is_authenticated %}
+<div class="askQuestionContainer">
+
+    <h2>Ask your question to our community</h2>
+
+    <form action="/postQuestion" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="currentUser" value="{{request.user}}">
+        <label for="queShortDesc">Give a brief description of your question</label>
+        <textarea name="queShortDesc" id="queShortDesc" cols="30" rows="5"></textarea>
+
+        <label for="queLongDesc">Explain your question in detail</label>
+        <textarea name="queLongDesc" id="basic-conf"></textarea>
+
+        <label for="tags">Add appropriate tags so that it can reach to more people</label>
+        <textarea name="tags" id="tags" cols="30" rows="2"></textarea>
+        <small>If there are more than one tag then use commas to separate them (e.g. - HTML, CSS, JS)</small>
+
+        <button type="submit" class="btn postBtn">Post question</button>
+    </form>
+
+</div>
+
+{% else %}
+<h2 class="notLoggedIn">Signup to ask questions. If you already have an account Login to get started.</h2>
+
+{% endif %}
+
+{% endblock body %}

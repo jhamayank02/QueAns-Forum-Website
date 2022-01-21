@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block css %}<link rel="stylesheet" href="static\css\home.css">{% endblock css %}
+
+{% block title %}Home{% endblock title %}
+{% block homeActive %}active{% endblock homeActive %}
+
+{% block body %}
+
+<!-- Home page -->
+<div class="homeContainer">
+    <div class="searchBox">
+        <form action="/search" method="POST">
+            {% csrf_token %}
+          <input type="text" name='query' placeholder="Enter text to search something">
+        <div class="searchIcon">
+            <button type="submit"><img src="/static/images/searchIcon.png" alt="search icon"></button>
+        </div>  
+        </form>
+        
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block js %}
+<!-- Set input field width according to the width of placeholder -->
+var input = document.getElementsByTagName('input');
+if(input!=null){
+for(i=0; i<input.length; i++){
+    if(input[i].getAttribute('placeholder')!=null){
+        input[i].setAttribute('size',input[i].getAttribute('placeholder').length);
+    }
+}
+}
+
+<!-- Hide footer in home page -->
+var footer = document.getElementById('footer');
+
+function footerHide() {
+    footer.style.display = 'none'
+}
+footer && footerHide()
+
+
+{% endblock js %}
